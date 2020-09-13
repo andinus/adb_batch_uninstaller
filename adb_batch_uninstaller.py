@@ -5,16 +5,18 @@ import sys
 
 __author__ = 'Guillaume Legrand'
 
-UNINSTALL_APP_PREFIXES = ['com.example']
+# UNINSTALL_APP_PREFIXES = ['com.example']
+UNINSTALL_APP_PREFIXES = ['com.google.android.videos', 'com.google.android.apps.maps', 'com.android.chrome']
 
 CMD_ADB_NAME = 'adb'
 CMD_ADB_DEVICE_ARG_PREFIX = '-s'
 CMD_ADB_SHELL_COMMAND = ['shell', 'pm list packages -3 -f']
 CMD_ADB_UNINSTALL_COMMAND = ['uninstall']
+CMD_ADB_UNINSTALL_COMMAND_NEW = ['pm uninstall -k --user 0']
 
 
 def adb_uninstall(device, package):
-    uninstallPackageCmd = [CMD_ADB_NAME] + ([CMD_ADB_DEVICE_ARG_PREFIX, device] if device else []) + CMD_ADB_UNINSTALL_COMMAND
+    uninstallPackageCmd = [CMD_ADB_NAME] + ([CMD_ADB_DEVICE_ARG_PREFIX, device] if device else []) + CMD_ADB_UNINSTALL_COMMAND_NEW
 
     subprocess.check_call(uninstallPackageCmd + [package])
 
